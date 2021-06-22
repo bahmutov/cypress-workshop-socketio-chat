@@ -5,7 +5,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "dev": "start-server-and-test 8080 cy:open"
   },
   "dependencies": {
     "ejs": "3.1.6",
@@ -22,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/bahmutov/cypress-workshop-socketio-chat/issues"
   },
-  "homepage": "https://github.com/bahmutov/cypress-workshop-socketio-chat#readme"
+  "homepage": "https://github.com/bahmutov/cypress-workshop-socketio-chat#readme",
+  "devDependencies": {
+    "cypress": "^7.5.0",
+    "prettier": "^2.3.1",
+    "start-server-and-test": "^1.12.5"
+  }
 }
