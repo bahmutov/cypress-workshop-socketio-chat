@@ -61,19 +61,7 @@
       /><button>Send</button>
     </form>
     <script>
-      var socket = io.connect('http://localhost:8080')
-
-      const clientActions = {
-        onChatMessage(msg) {
-          $('#messages').append($('<li>').html(msg))
-        },
-        isOnline(username) {
-          $('#messages').append($('<li>').html(username))
-        },
-      }
-      if (window.Cypress) {
-        window.clientActions = clientActions
-      }
+      const socket = io.connect('http://localhost:8080')
 
       // submit text message without reload/refresh the page
       $('form').submit(function (e) {
@@ -83,19 +71,16 @@
         return false
       })
 
-      // socket.on('chat_message', (msg) =>
-      //   $('#messages').append($('<li>').html(msg)),
-      // )
+      socket.on('chat_message', (msg) =>
+        $('#messages').append($('<li>').html(msg)),
+      )
 
-      // socket.on('is_online', (username) =>
-      //   $('#messages').append($('<li>').html(username)),
-      // )
-
-      socket.on('chat_message', clientActions.onChatMessage)
-      socket.on('is_online', clientActions.isOnline)
+      socket.on('is_online', (username) =>
+        $('#messages').append($('<li>').html(username)),
+      )
 
       // ask username
-      var username = prompt('Please tell me your name')
+      const username = prompt('Please tell me your name')
       socket.emit('username', username)
     </script>
   </body>
