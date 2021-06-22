@@ -1,16 +1,5 @@
 /// <reference types="cypress" />
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
-
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
+const io = require('socket.io-client')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -19,4 +8,35 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+
+  let chatSocket
+  let lastMessage
+
+  on('task', {
+    connect(name) {
+      chatSocket = io('http://localhost:8080')
+      chatSocket.emit('username', name)
+      chatSocket.on('chat_message', (msg) => {
+        lastMessage = msg
+        console.log('lastMessage is "%s"', lastMessage)
+      })
+
+      return null
+    },
+
+    getLastMessage() {
+      return lastMessage || null
+    },
+
+    say(message) {
+      chatSocket.emit('chat_message', message)
+      return null
+    },
+
+    disconnect() {
+      chatSocket.disconnect()
+      chatSocket = null
+      return null
+    },
+  })
 }
