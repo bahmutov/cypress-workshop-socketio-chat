@@ -1,0 +1,26 @@
+{
+  "name": "cypress-workshop-socketio-chat",
+  "version": "1.0.0",
+  "description": "Testing Socketio chat app using Cypres.io",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "ejs": "3.1.6",
+    "express": "^4.16.4",
+    "socket.io": "4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/cypress-workshop-socketio-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahmutov/cypress-workshop-socketio-chat/issues"
+  },
+  "homepage": "https://github.com/bahmutov/cypress-workshop-socketio-chat#readme"
+}
